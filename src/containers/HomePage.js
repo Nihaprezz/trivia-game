@@ -1,31 +1,33 @@
 import React from "react";
 
 class HomePage extends React.Component {
-    constructor(){
-        super();
+    // constructor(){
+    //     super();
 
-        this.state = {
-            questions: []
-        };
-    }
+    //     this.state = {
+    //         questions: []
+    //     };
+    // }
 
-    componentDidMount(){
-        fetch('https://opentdb.com/api.php?amount=10&category=15&difficulty=easy&type=multiple')
-        .then(resp => resp.json())
-        .then(data => this.setState({
-            questions: data.results
-        }))
-    }
+    // componentDidMount(){
+    //     fetch('https://opentdb.com/api.php?amount=10&category=15&difficulty=easy&type=multiple')
+    //     .then(resp => resp.json())
+    //     .then(data => this.setState({
+    //         questions: data.results
+    //     }))
+    // }
     
     render(){
-        console.log(this.state.questions)
         return (
-            <div> 
-                Home Page Component 
-                {this.state.questions.map(q => {
-                    return <p key={q.question}>{q.question}</p>
-                })}
-
+            <div className="home-page"> 
+                <div className="player-count">
+                    <p>How many players will be playing?</p>
+                    
+                    <div className="player-count-btns">
+                        <button className="button is-primary">1 Player</button>
+                        <button className="button is-primary">2 Players</button>
+                    </div>
+                </div>
             </div>
         )
     }
