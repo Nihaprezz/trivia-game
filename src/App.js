@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 
 import Header from "./components/Header"
 import HomePage from "./containers/HomePage"
+import TriviaStart from "./containers/TriviaStart"
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
 
       <Switch>
         < Route exact path="/" render={() => < HomePage />} />
+        < Route exact path="/trivia" render={() => < TriviaStart />} />
       </Switch>
     </div>
   );
