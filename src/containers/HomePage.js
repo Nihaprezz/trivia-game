@@ -20,6 +20,11 @@ class HomePage extends React.Component {
     render(){
         return (
             <div className="home-page"> 
+                <div className="instructions">
+                    <p>How to Play</p>
+                    <div>Using the Open Trivia Database </div>
+                </div>
+
                 <div className="player-count">
                     <p>How many players will be playing?</p>
                     
