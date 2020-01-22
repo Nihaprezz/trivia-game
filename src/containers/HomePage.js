@@ -1,23 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom"
+import { connect } from "react-redux";
+import { setUsers } from "../redux/actions"
 
-class HomePage extends React.Component {
-    // constructor(){
-    //     super();
-
-    //     this.state = {
-    //         questions: []
-    //     };
-    // }
-
-    // componentDidMount(){
-    //     fetch('https://opentdb.com/api.php?amount=10&category=15&difficulty=easy&type=multiple')
-    //     .then(resp => resp.json())
-    //     .then(data => this.setState({
-    //         questions: data.results
-    //     }))
-    // }
-    
+class HomePage extends React.Component {    
     render(){
         return (
             <div className="home-page"> 
@@ -30,8 +16,13 @@ class HomePage extends React.Component {
                     <p>How many players will be playing?</p>
                     
                     <div className="player-count-btns">
-                        <Link to="/trivia" className="button is-primary"> 1 Player</Link>
-                        <Link to="/trivia" className="button is-primary"> 2 Player</Link>
+                        <Link to="/trivia" className="button is-primary" onClick={() => this.props.setUsers(1)}>
+                             1 Player
+                        </Link>
+
+                        <Link to="/trivia" className="button is-primary" onClick={() => this.props.setUsers(2)}> 
+                            2 Player
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -39,4 +30,10 @@ class HomePage extends React.Component {
     }
 }
 
-export default HomePage;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setUsers: (numOfPlayers) => {dispatch(setUsers(numOfPlayers))}
+    }
+}
+
+export default connect(null, mapDispatchToProps)(HomePage);
