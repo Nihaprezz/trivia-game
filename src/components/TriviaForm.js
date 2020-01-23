@@ -3,6 +3,30 @@ import React from "react"
 
 //will handle constructing the api
 class TriviaForm extends React.Component {
+    constructor(){
+        super();
+
+        this.state = {
+            category: "",
+            difficulty: ""
+        }
+    }
+
+    handleChange = (e) => {
+        this.setState({[e.target.name]: e.target.value})
+    }
+
+    handleSubmit = () => {
+        if (this.state.category === "" || this.state.difficulty === "") {
+            alert("Both Category and Difficulty must be selected! Thanks!")
+        } else {
+            let apiString = `https://opentdb.com/api.php?amount=10&category=${this.state.category}&difficulty=${this.state.difficulty}&type=multiple`
+            console.log('The API String is', apiString)
+
+            //this is where it should call on a function from the redux action/reducer and 
+            //we will pass in the constructed API url.
+        }
+    }
 
     render(){
         return (
@@ -12,16 +36,16 @@ class TriviaForm extends React.Component {
                     <label className="label">Category</label>
                     <div className="control">
                         <div className="select">
-                        <select>
-                            <option>Select Category</option>
-                            <option>Video Games</option>
-                            <option>Music</option>
-                            <option>Books</option>
-                            <option>Sports</option>
-                            <option>Anime/Manga</option>
-                            <option>Comics</option>
-                            <option>Art</option>
-                            <option>Animals</option>
+                        <select name="category" onChange={(e) => this.handleChange(e)}>
+                            <option value="">Select Category</option>
+                            <option value="15">Video Games</option>
+                            <option value="12">Music</option>
+                            <option value="10">Books</option>
+                            <option value="21">Sports</option>
+                            <option value="31">Anime/Manga</option>
+                            <option value="32">Cartoons/Animations</option>
+                            <option value="25">Art</option>
+                            <option value="27">Animals</option>
                         </select>
                         </div>
                     </div>
@@ -31,17 +55,17 @@ class TriviaForm extends React.Component {
                     <label className="label">Difficulty</label>
                     <div className="control">
                         <div className="select">
-                        <select>
-                            <option>Select Difficulty</option>
-                            <option>Easy</option>
-                            <option>Medium</option>
-                            <option>Hard</option>
+                        <select name="difficulty" onChange={(e) => this.handleChange(e)}>
+                            <option value="">Select Difficulty</option>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
                         </select>
                         </div>
                     </div>
                 </div>
 
-                <button className="button is-primary">Start Game</button>
+                <button onClick={() => this.handleSubmit()} className="button is-primary">Start Game</button>
 
             </div>
         )
