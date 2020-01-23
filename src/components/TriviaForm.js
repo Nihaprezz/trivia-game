@@ -1,5 +1,6 @@
 import React from "react"
-
+import {connect} from "react-redux"
+import { fetchTriviaData } from "../redux/actions"
 
 //will handle constructing the api
 class TriviaForm extends React.Component {
@@ -20,11 +21,14 @@ class TriviaForm extends React.Component {
         if (this.state.category === "" || this.state.difficulty === "") {
             alert("Both Category and Difficulty must be selected! Thanks!")
         } else {
-            let apiString = `https://opentdb.com/api.php?amount=10&category=${this.state.category}&difficulty=${this.state.difficulty}&type=multiple`
-            console.log('The API String is', apiString)
+            // let apiString = `https://opentdb.com/api.php?amount=10&category=${this.state.category}&difficulty=${this.state.difficulty}&type=multiple`
+            // console.log('The API String is', apiString)
 
             //this is where it should call on a function from the redux action/reducer and 
             //we will pass in the constructed API url.
+
+            this.props.fetchTriviaData(this.state.category, this.state.difficulty)
+            
         }
     }
 
@@ -72,4 +76,10 @@ class TriviaForm extends React.Component {
     }
 }
 
-export default TriviaForm
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchTriviaData: (category, diff) => dispatch(fetchTriviaData(category, diff))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(TriviaForm)

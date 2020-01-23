@@ -9,8 +9,18 @@ const playerReducer = (state = 0, action) => {
     }
 }
 
+const gameReducer = (state = [], action) => {
+    switch(action.type) {
+        case "SET_GAME_DATA":
+            return action.payload
+        default:
+            return state;
+    }
+}
+
 const rootReducer = combineReducers({
-    numOfPlayers: playerReducer
+    numOfPlayers: playerReducer,
+    gameData: gameReducer
 });
 
 export default rootReducer;
