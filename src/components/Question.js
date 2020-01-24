@@ -23,8 +23,8 @@ const Question = (props) => {
             <h3>Question: {question}</h3>
             <p>Options : </p>
             <div>
-            {options.map(option => {
-                return < Option key={option} optionString={option}/>
+            {shuffleArray(options).map(option => {
+                return < Option key={option} optionString={option} handleChange={props.handleChange}/>
             })}
             </div>
         </div>
