@@ -1,5 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
+import Question from "../components/Question"
 
 class TriviaQuestionsContainer extends React.Component {
     state = {
@@ -7,9 +8,11 @@ class TriviaQuestionsContainer extends React.Component {
     }
 
     render() {
-        console.log(this.props, this.state)
+        let currentQuestion = this.props.gameData[this.state.questionNum]
         return (
-            <div>This is the trivia questions container</div>
+            <div>
+                < Question questionObj={currentQuestion} />
+            </div>
         )
     }
 }
