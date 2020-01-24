@@ -9,7 +9,8 @@ class TriviaForm extends React.Component {
 
         this.state = {
             category: "",
-            difficulty: ""
+            difficulty: "",
+            gameReady: false
         }
     }
 
@@ -21,21 +22,14 @@ class TriviaForm extends React.Component {
         if (this.state.category === "" || this.state.difficulty === "") {
             alert("Both Category and Difficulty must be selected! Thanks!")
         } else {
-            // let apiString = `https://opentdb.com/api.php?amount=10&category=${this.state.category}&difficulty=${this.state.difficulty}&type=multiple`
-            // console.log('The API String is', apiString)
-
-            //this is where it should call on a function from the redux action/reducer and 
-            //we will pass in the constructed API url.
-
             this.props.fetchTriviaData(this.state.category, this.state.difficulty)
-            
         }
     }
 
     render(){
         return (
             <div>
-                
+                <p>Choose the from the options below to generate the Trivia questions!</p>
                 <div className="field">
                     <label className="label">Category</label>
                     <div className="control">
@@ -69,7 +63,9 @@ class TriviaForm extends React.Component {
                     </div>
                 </div>
 
-                <button onClick={() => this.handleSubmit()} className="button is-primary">Start Game</button>
+                <button onClick={() => this.handleSubmit()} className="button is-primary">
+                    Start Game
+                </button>
 
             </div>
         )

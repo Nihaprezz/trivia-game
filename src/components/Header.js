@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Header.css"
 
 class Header extends React.Component {
@@ -6,12 +7,14 @@ class Header extends React.Component {
         return (
             <div className="header">
                <div className="header-text">
-                   <span>T</span>
-                   <span>R</span>
-                   <span>I</span>
-                   <span>V</span>
-                   <span>I</span>
-                   <span>A</span>
+                   < Link to="/">
+                    <span>T</span>
+                    <span>R</span>
+                    <span>I</span>
+                    <span>V</span>
+                    <span>I</span>
+                    <span>A</span>
+                   </Link>
                </div>
             </div>
         )

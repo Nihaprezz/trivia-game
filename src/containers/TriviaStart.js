@@ -1,15 +1,22 @@
 import React from "react"
 import TriviaForm from "../components/TriviaForm"
+import TriviaQuestionsCont from "./TriviaQuestionsContatiner"
+import { connect } from "react-redux"
 
 class TriviaStart extends React.Component {
     render(){
         return (
             <div> 
-                <p>Choose the from the options below to generate the Trivia questions!</p>
-                < TriviaForm />
+                {this.props.gameData.length === 0 ? < TriviaForm /> : < TriviaQuestionsCont />}
             </div>
         )
     }
 }
 
-export default TriviaStart
+const mapStateToProps = state => {
+    return {
+        gameData : state.gameData
+    }
+}
+
+export default connect(mapStateToProps, null)(TriviaStart)
