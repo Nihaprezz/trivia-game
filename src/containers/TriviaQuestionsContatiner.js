@@ -17,6 +17,7 @@ class TriviaQuestionsContainer extends React.Component {
     changeQuestion = () => {
         let level = this.state.questionNum
         level++;
+        
         if (level === 10){
             alert('end of game!')
             window.location.reload();
