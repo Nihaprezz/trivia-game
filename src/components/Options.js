@@ -4,7 +4,7 @@ const Option = (props) => {
     return (
         <label>
             <input onChange={(e) => props.handleChange(e)} type="radio" name="answer" value={props.optionString}/>
-            {props.optionString}
+            <div dangerouslySetInnerHTML={{ __html: `${props.optionString}`}}/>
         </label>
     )
 }

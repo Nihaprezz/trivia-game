@@ -11,10 +11,6 @@ const shuffleArray = (array) => { //helper method used to shuffle the array of o
     return array
 }
 
-function decodeString(string){
-    //will be used to remove any exccess characted from strings recieved from the api
-}
-
 const Question = (props) => {
     let { category, difficulty, question, correct_answer} = props.questionObj
     let options = [...props.questionObj.incorrect_answers, correct_answer]
@@ -24,7 +20,7 @@ const Question = (props) => {
         <div> 
             <h1>Category: {category}</h1>
             <h2>Difficulty: {difficulty}</h2>
-            <h3>Question: {question}</h3>
+            <h3>Question: <span dangerouslySetInnerHTML={{ __html: `${question}` }} ></span></h3>
             <p>Options : </p>
             <div>
             {shuffleArray(options).map(option => {

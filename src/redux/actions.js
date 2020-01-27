@@ -12,7 +12,6 @@ function fetchTriviaData (category, diff) {
         fetch(triviaUrl)
         .then(resp => resp.json())
         .then(gameData => {
-            console.log(gameData)
             dispatch(setTriviaData(gameData))
         })
     }

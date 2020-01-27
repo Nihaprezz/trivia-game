@@ -5,13 +5,25 @@ import Question from "../components/Question"
 class TriviaQuestionsContainer extends React.Component {
     state = {
         questionNum: 0,
-        selectedOption: ""
+        selectedOption: "",
+        rightOption: ""
+    }
+
+    componentDidMount(){
+        let rightAnswer = this.props.gameData[this.state.questionNum].correct_answer
+        this.setState({rightOption: rightAnswer})
     }
 
     handleChange = (e) => {
-        console.log('handle change function hitting')
         this.setState({selectedOption: e.currentTarget.value})
-        this.changeQuestion()
+        
+        this.checkAnswer()
+        //this.changeQuestion()
+    }
+
+    checkAnswer = () => {
+        console.log('correct answer', this.state.rightOption)
+        console.log('selected option', this.state.selectedOption)
     }
 
     changeQuestion = () => {
