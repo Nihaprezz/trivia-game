@@ -1,6 +1,6 @@
-import React from "react"
-import { connect } from "react-redux"
-import Question from "../components/Question"
+import React from "react";
+import { connect } from "react-redux";
+import Question from "../components/Question";
 
 class TriviaQuestionsContainer extends React.Component {
     state = {
@@ -17,13 +17,19 @@ class TriviaQuestionsContainer extends React.Component {
     handleChange = (e) => {
         this.setState({selectedOption: e.currentTarget.value})
         
-        this.checkAnswer()
-        //this.changeQuestion()
+        this.checkAnswer(e.target.value)
+        this.changeQuestion()
     }
 
-    checkAnswer = () => {
+    checkAnswer = (selectedOption) => {
         console.log('correct answer', this.state.rightOption)
-        console.log('selected option', this.state.selectedOption)
+        console.log('selected option', selectedOption)
+
+        if (selectedOption === this.state.rightOption) {
+            alert('right answer!')
+        } else {
+            alert('wrong answer!')
+        }
     }
 
     changeQuestion = () => {
@@ -34,7 +40,7 @@ class TriviaQuestionsContainer extends React.Component {
             alert('end of game!')
             window.location.reload();
         } else {
-            this.setState({questionNum: level})    
+            this.setState({questionNum: level, rightOption: this.props.gameData[level].correct_answer}) // changes the question and the correct answer which will be in the state
         }  
     }
 
