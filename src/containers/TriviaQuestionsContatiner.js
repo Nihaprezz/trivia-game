@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Question from "../components/Question";
+import Swal from 'sweetalert2'
 
 class TriviaQuestionsContainer extends React.Component {
     state = {
@@ -26,10 +27,30 @@ class TriviaQuestionsContainer extends React.Component {
         console.log('selected option', selectedOption)
 
         if (selectedOption === this.state.rightOption) {
-            alert('right answer!')
+                this.fireAlert('Right')
         } else {
-            alert('wrong answer!')
+                this.fireAlert('Wrong')
         }
+    }
+
+    //will handle firing the alert depending on the text that is passed in.
+    fireAlert = (resultTxt) => {
+        Swal.fire({
+            title: 'Results',
+            text: `${resultTxt} Answer`,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Next Question',
+            cancelButtonText: 'Quit Game'
+        })
+        .then((result) => {
+            if(result.value) {
+                console.log("accepted")
+            } else {
+                console.log('dismissed!')
+            }
+        })
     }
 
     changeQuestion = () => {
