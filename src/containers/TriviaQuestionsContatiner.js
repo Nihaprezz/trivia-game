@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom"
 import Question from "../components/Question";
 import Swal from 'sweetalert2'
 
@@ -19,7 +20,6 @@ class TriviaQuestionsContainer extends React.Component {
         this.setState({selectedOption: e.currentTarget.value})
         
         this.checkAnswer(e.target.value)
-        this.changeQuestion()
     }
 
     checkAnswer = (selectedOption) => {
@@ -47,8 +47,10 @@ class TriviaQuestionsContainer extends React.Component {
         .then((result) => {
             if(result.value) {
                 console.log("accepted")
+                this.changeQuestion()
             } else {
                 console.log('dismissed!')
+                this.props.history.push('/')
             }
         })
     }
@@ -79,4 +81,4 @@ const mapStateToProps = state => {
     return { gameData: state.gameData}
 }
 
-export default connect(mapStateToProps, null)(TriviaQuestionsContainer)
+export default connect(mapStateToProps, null)(withRouter(TriviaQuestionsContainer))
