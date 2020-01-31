@@ -1,14 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
-import Question from "../components/Question";
 import Swal from 'sweetalert2'
+
+import Question from "../components/Question";
+import Score from "../components/Score"
+import ScoreBoard from "../components/ScoreBoard"
 
 class TriviaQuestionsContainer extends React.Component {
     state = {
         questionNum: 0,
         selectedOption: "",
-        rightOption: ""
+        rightOption: "",
     }
 
     componentDidMount(){
@@ -19,7 +22,7 @@ class TriviaQuestionsContainer extends React.Component {
     handleChange = (e) => {
         this.setState({selectedOption: e.currentTarget.value})
         
-        this.checkAnswer(e.target.value)
+        this.checkAnswer(e.target.value) //goes to checking the answer
     }
 
     checkAnswer = (selectedOption) => {
@@ -60,25 +63,31 @@ class TriviaQuestionsContainer extends React.Component {
         level++;
         
         if (level === 10){
-            alert('end of game!')
-            window.location.reload();
+            this.setState({questionNum: level})
+            //last time incrementing the question Num, once level is set to 10 it will trigger showing the score.
         } else {
-            this.setState({questionNum: level, rightOption: this.props.gameData[level].correct_answer}) // changes the question and the correct answer which will be in the state
+            this.setState({questionNum: level, rightOption: this.props.gameData[level].correct_answer}) 
+            // changes the question and the correct answer which will be in the state
         }  
     }
 
     render() {
         let currentQuestion = this.props.gameData[this.state.questionNum]
+
+        let showScore = this.props.numOfPlayers === 1 ? < Score /> : < ScoreBoard /> //scoreboard set depends on the num of players
+
         return (
             <div>
-                < Question questionObj={currentQuestion} handleChange={this.handleChange}/>
+                {this.state.questionNum === 10 ? showScore : (
+                    < Question questionObj={currentQuestion} handleChange={this.handleChange}/>
+                )}
             </div>
         )
     }
 }
 
 const mapStateToProps = state => {
-    return { gameData: state.gameData}
+    return { gameData: state.gameData, numOfPlayers: state.numOfPlayers}
 }
 
 export default connect(mapStateToProps, null)(withRouter(TriviaQuestionsContainer))
