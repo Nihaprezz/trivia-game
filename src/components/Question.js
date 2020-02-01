@@ -15,6 +15,11 @@ const Question = (props) => {
     let { category, difficulty, question, correct_answer} = props.questionObj
     let options = [...props.questionObj.incorrect_answers, correct_answer]
     shuffleArray(options);
+    
+    let twoPlayerString = props.questionNum % 2 === 0 && props.numOfPlayers === 2 ? <h1>Player 1</h1> : <h1>Player 2</h1>
+    // console.log('INSIDE OF THE QUESTION COMPONENT', ' NUM OF PLAYERS: ', props.numOfPlayers)
+    // console.log('CURRENT QUESTION NUM', props.questionNum)
+    console.log('CHECKING IS NUMBER IS ODD', props.questionNum % 2 )
 
     return (
         <div> 
@@ -22,6 +27,7 @@ const Question = (props) => {
             <h2>Difficulty: {difficulty}</h2>
             <h3>Question: <span dangerouslySetInnerHTML={{ __html: `${question}` }} ></span></h3>
             <p>Options : </p>
+            {props.numOfPlayers === 2 && twoPlayerString}
             <div>
             {shuffleArray(options).map(option => {
                 return < Option key={option} optionString={option} handleChange={props.handleChange}/>

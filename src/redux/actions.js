@@ -6,6 +6,7 @@ function setTriviaData (gameData) {
     return {type: "SET_GAME_DATA", payload: gameData.results}
 }
 
+
 function fetchTriviaData (category, diff) {
     let triviaUrl = `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${diff}&type=multiple`
     return (dispatch) => {

@@ -20,7 +20,7 @@ class TriviaQuestionsContainer extends React.Component {
     }
 
     handleChange = (e) => {
-        this.setState({selectedOption: e.currentTarget.value})
+        this.setState({selectedOption: e.currentTarget.value}) //update state with the option the user picks
         
         this.checkAnswer(e.target.value) //goes to checking the answer
     }
@@ -61,6 +61,8 @@ class TriviaQuestionsContainer extends React.Component {
     changeQuestion = () => {
         let level = this.state.questionNum
         level++;
+
+        //need to figure out how to refetch
         
         if (level === 10){
             this.setState({questionNum: level})
@@ -79,7 +81,7 @@ class TriviaQuestionsContainer extends React.Component {
         return (
             <div>
                 {this.state.questionNum === 10 ? showScore : (
-                    < Question questionObj={currentQuestion} handleChange={this.handleChange}/>
+                    < Question questionObj={currentQuestion} handleChange={this.handleChange} numOfPlayers={this.props.numOfPlayers} questionNum={this.state.questionNum}/>
                 )}
             </div>
         )
