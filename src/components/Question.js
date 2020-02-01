@@ -16,10 +16,11 @@ const Question = (props) => {
     let options = [...props.questionObj.incorrect_answers, correct_answer]
     shuffleArray(options);
     
+    //the string that will appear on two player games
     let twoPlayerString = props.questionNum % 2 === 0 && props.numOfPlayers === 2 ? <h1>Player 1</h1> : <h1>Player 2</h1>
-    // console.log('INSIDE OF THE QUESTION COMPONENT', ' NUM OF PLAYERS: ', props.numOfPlayers)
-    // console.log('CURRENT QUESTION NUM', props.questionNum)
-    console.log('CHECKING IS NUMBER IS ODD', props.questionNum % 2 )
+
+    // console.log('CHECKING IS NUMBER IS ODD', props.questionNum % 2 )
+    //Had to made sure it was odd.
 
     return (
         <div> 

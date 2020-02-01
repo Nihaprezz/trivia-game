@@ -62,7 +62,7 @@ class TriviaQuestionsContainer extends React.Component {
         let level = this.state.questionNum
         level++;
 
-        //need to figure out how to refetch
+        //need to figure out how to add scores differently when game is 2 player or 1 player.
         
         if (level === 10){
             this.setState({questionNum: level})
@@ -81,7 +81,9 @@ class TriviaQuestionsContainer extends React.Component {
         return (
             <div>
                 {this.state.questionNum === 10 ? showScore : (
-                    < Question questionObj={currentQuestion} handleChange={this.handleChange} numOfPlayers={this.props.numOfPlayers} questionNum={this.state.questionNum}/>
+
+                    < Question questionObj={currentQuestion} handleChange={this.handleChange} numOfPlayers={this.props.numOfPlayers} questionNum={this.state.questionNum} />
+
                 )}
             </div>
         )
