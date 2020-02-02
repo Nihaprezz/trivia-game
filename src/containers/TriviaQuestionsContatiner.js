@@ -7,6 +7,16 @@ import Question from "../components/Question";
 import Score from "../components/Score"
 import ScoreBoard from "../components/ScoreBoard"
 
+const shuffleArray = (array) => { //helper method used to shuffle the array of options
+    for(let i = array.length-1; i > 0; i--){
+        const j = Math.floor(Math.random() * i)
+        const temp = array[i]
+        array[i] = array[j]
+        array[j] = temp
+      }
+    return array
+}
+
 class TriviaQuestionsContainer extends React.Component {
     state = {
         questionNum: 0,
@@ -78,11 +88,14 @@ class TriviaQuestionsContainer extends React.Component {
 
         let showScore = this.props.numOfPlayers === 1 ? < Score /> : < ScoreBoard /> //scoreboard set depends on the num of players
 
+        let options = [...currentQuestion.incorrect_answers, currentQuestion.correct_answer]
+        shuffleArray(options)
+
         return (
             <div>
                 {this.state.questionNum === 10 ? showScore : (
 
-                    < Question questionObj={currentQuestion} handleChange={this.handleChange} numOfPlayers={this.props.numOfPlayers} questionNum={this.state.questionNum} />
+                    < Question questionObj={currentQuestion} optionsArr={options} handleChange={this.handleChange} numOfPlayers={this.props.numOfPlayers} questionNum={this.state.questionNum} />
 
                 )}
             </div>
